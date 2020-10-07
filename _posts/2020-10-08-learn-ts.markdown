@@ -2,7 +2,7 @@
 layout: post
 title:  "Learn typescript"
 date:   2020-10-08
-categories: typescript javascript
+categories: typescript
 ---
 
 # Basic Type
@@ -131,6 +131,7 @@ const rectangle = new Rectangle(200, 10)
 > For the rest of the developers, we should say that Generics are a way to declare an array, class or function that use a type unbeknownst to them during the declaration. This generic type is represented by a letter (usually T), enclosed by greater and less than symbols: .
 Any letter or letters can be used, as long as they are enclosed in <>. These letters are later used as tokens within the implementation logic and replaced by actual types when the definition occurs.
 example:
+
 ```ts
 function myMax<T>(x: T, y: T): T {
     return x > y ? x : y
