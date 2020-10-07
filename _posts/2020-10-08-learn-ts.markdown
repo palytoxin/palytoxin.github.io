@@ -1,0 +1,142 @@
+---
+layout: post
+title:  "Learn typescript"
+date:   2020-10-08
+categories: typescript javascript
+---
+
+# Basic Type
+
+> Boolean, Number and String
+
+```ts
+let isDone: boolean = false
+let decimal: number = 1
+let hex: number = 0xf00d
+let binary: number = 0b101
+let octal: number = 0o776
+let big: bigint = 100n
+let color: string = "blue"
+```
+These are the basic ones and should be declared as follows
+
+> Arrays
+
+Arrays types can be written in two ways:
+```ts
+let list: number[] = [1, 2, 3]
+let list: Array<number> = [1, 2, 3]
+```
+
+> Tuples
+
+```ts
+let x: [string, number]
+x = ["hel", 10]
+```
+
+> Enums
+
+```ts
+enum Color {
+    Red,
+    Green,
+    Blue,
+}
+let c: Color = Color.Green
+```
+Enums historically started with 0, so Red = 0, Green = 1 and Blue = 2
+
+> Special types
+
+```ts
+// for this scenarios we can use the pipeline character(|) to concatenate all posible types it could receive:
+const elem = document.getElementById("elementId")! as HTMLInputElement
+
+//The pipeline can also be used to indicate that specific strings are supported as parameters.
+function combine(a: number | string, b: number | string): void {
+    // todo
+}
+
+// TS has another type called: never, this type of value shyould never occur.
+function err(msg: string): never {
+    throw new Error("msg")
+}
+
+// has unknown type, it's type must be verified before being assigend to any other type.
+let input: unknown
+if(typeof input === "string") {
+    let name: string = input
+}
+let myinput: unknown
+let mylength: number = (<string>input).length
+let mylength: number = (input as string).length
+```
+
+# Interfaces
+
+Like in many other languages, interfaces are related to defining types.
+```ts
+interface User {
+    name: string
+    age: number
+}
+function displayPersonalInfo(user: User) {
+    console.log(`Name: ${user.name} - Age: ${user.age}`)
+}
+```
+
+When creating intefaces we can also add a few modifiers like the ? sign, to indicate that an attribute could be null, Or even use the readonly keyword, to set an attribute as immutable.
+```ts
+interface Square {
+    color?: string
+    width?: number
+}
+interface Point {
+    readonly x: number
+    readonly y: number
+}
+let square: Square = {
+    width: 14,
+}
+```
+> readonly Array
+
+```ts
+let a: number[] = [1, 2, 3]
+let ronumbers: ReadonlyArray<number> = a
+ronumbers[0] = 4 // Wrong!
+// but it could be used for iterating over its values for reading purposes
+for (const num of ronumbers) {
+    console.log(num)
+}
+```
+
+# Classes
+
+```ts
+class Rectangle {
+    height: number
+    width: number
+
+    constructor(h: number, w: number) {
+        this.height = h
+        this.width = w
+    }
+}
+const rectangle = new Rectangle(200, 10)
+```
+
+# Generics
+> For the rest of the developers, we should say that Generics are a way to declare an array, class or function that use a type unbeknownst to them during the declaration. This generic type is represented by a letter (usually T), enclosed by greater and less than symbols: .
+Any letter or letters can be used, as long as they are enclosed in <>. These letters are later used as tokens within the implementation logic and replaced by actual types when the definition occurs.
+example:
+```ts
+function myMax<T>(x: T, y: T): T {
+    return x > y ? x : y
+}
+let intMax = myMax<number>(12, 50)
+console.log(intMax)
+```
+
+[From warambil](https://www.warambil.com/typescript-why-is-so-important)
