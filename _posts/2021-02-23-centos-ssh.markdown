@@ -52,3 +52,7 @@ service sshd84 restart
 ausearch -c 'sshd' --raw | audit2allow -M my-sshd
 semodule -i my-sshd.pp
 ```
+
+有时ausearch命令不会输出任何东西导致selinux添加规则失败，需要重启auditd服务
+
+`# service audied restart`
